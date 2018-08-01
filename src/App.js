@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Quakes from "./Quakes";
 
 class App extends Component {
 
@@ -11,8 +12,9 @@ class App extends Component {
         </div>
         <div className="quakeContainer">
           <h1>Earthquakes from the past week: </h1>
-          ...put Quakes Component here...
+          <Quakes />
         </div>
+
       </div>
     );
   }
