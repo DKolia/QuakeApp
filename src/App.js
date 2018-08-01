@@ -4,15 +4,23 @@ import Quakes from "./Quakes";
 class App extends Component {
   constructor(){
     super();
-    this.state = {quakeData: []}
+    this.state = {quakeData: ""}
   }
 
   getQuakes = async () => {
     try {
-      const quakesFound = fetch("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.geojson")
+      const quakesFound = await fetch("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.geojson")
+      const quakesJSON = await quakesFound.json();
+      return quakesJSON;
     } catch (err) {
       return err
     }
+  }
+
+  componentDidMount = () => {
+    this.getQuakes().then((quakes) => {
+      this.setState({quakeData: quakes})
+    })
   }
 
   render() {
@@ -21,9 +29,9 @@ class App extends Component {
         <div className="mapContainer">
           ...put Map Component here...
         </div>
-        <div className="quakeContainer">
+        <div id="info" className="quakeContainer">
           <h1>Earthquakes from the past week: </h1>
-          <Quakes />
+            {(this.state.quakeData === "") ? null : <Quakes foundQuakes={this.state.quakeData}/>}
         </div>
 
       </div>
