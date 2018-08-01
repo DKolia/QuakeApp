@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Quakes from "./Quakes";
+import Maps from "./Maps";
 
 class App extends Component {
   constructor(){
@@ -27,7 +28,10 @@ class App extends Component {
     return (
       <div className="app">
         <div className="mapContainer">
-          ...put Map Component here...
+          <Maps
+            containerElement={<div style={{ height: `400px` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+          />
         </div>
         <div id="info" className="quakeContainer">
           <h1>Earthquakes from the past week: </h1>
